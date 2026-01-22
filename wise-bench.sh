@@ -475,7 +475,6 @@ if [ -f "/usr/local/cuda/bin/nvcc" ] || [ -n "$(find /usr -name nvcc 2>/dev/null
     print_table_row "CUDA Toolkit" "✓ Available"
     CUDA_STATUS=1
 else
-else
     print_table_row "CUDA Toolkit" "⚠ Not detected"
     CUDA_STATUS=0
 fi
@@ -513,7 +512,7 @@ if [[ "$TF_GPU_COUNT" -gt 0 ]]; then
     TF_STATUS=1
 else
     print_table_row "TensorFlow GPU" "⚠ CPU Only"
-    TF_STATUS=0
+    TF_STATUS=1
 fi
 
 if [ -e "/dev/v4l2-nvenc" ]; then

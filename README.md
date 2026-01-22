@@ -149,8 +149,6 @@ The following software components are available in the base image:
 | PyTorch      | 2.0.0+nv23.02  | Deep learning framework            |
 | TensorFlow   | 2.12.0         | Machine learning framework         |
 | ONNX Runtime | 1.16.3         | Cross-platform inference engine    |
-| VPI          | 3.2.4          | Vision Programming Interface       |
-| Vulkan       | 1.3.204        | Graphics and compute API           |
 | OpenCV       | 4.8.0          | Computer vision library with CUDA® |
 | GStreamer    | 1.16.2         | Multimedia framework               |
 
@@ -166,7 +164,6 @@ The following software components/packages are provided further as a part of thi
 
 
 ## Before You Start
-
 - The container provides flexibility to users, as they can download the pre-converted & pre-quantized Meta Llama 3.2 Instruct 1B model from Hugging Face using `download_model.sh`, or they can also follow [the Quantization README](./quantization-readme.md) to convert & quantize Hugging Face models by themselves.
 
 ### Important: Hugging Face Token Configuration
@@ -301,7 +298,9 @@ Here are quick commands/instructions to troubleshoot issues with the Jetson™ L
   tail -f llamacpp.log
   ```
 - Check if the model is loaded using CPU or GPU or partially both via logs (ideally should be 100% GPU loaded).
-
+  ```
+  ollama ps
+  ```
 - Kill & restart services within the container (check pid manually via `ps -eaf` or use pid stored in `LlamaCpp.pid`)
   ```
   kill $(cat llamacpp.pid)
@@ -347,7 +346,7 @@ def generate_with_LlamaCpp_stream(prompt):
                     print(f"[Error decoding JSON chunk]: {e}")
 
 # Example usage
-if name == "__main__":
+if __name__ == "__main__":
     prompt = "Explain quantum computing in simple terms."
     generate_with_LlamaCpp_stream(prompt)
 
@@ -364,9 +363,8 @@ def generate_response(prompt):
     for chunk in response:
         print(chunk["choices"][0]["text"], end="", flush=True)
 
-if name == "__main__":
+if __name__ == "__main__":
     generate_response("Explain quantum computing in simple terms.")
-```
 ```
 Save it as script.py and run it using the following command:
 ```
