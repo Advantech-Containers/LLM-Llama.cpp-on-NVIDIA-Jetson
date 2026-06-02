@@ -587,7 +587,7 @@ if curl --silent --fail "$OPENAI_API_LLAMA_CPP_BASE/models" > /dev/null; then
     fi
 
     # ---- Check Ollama Execution Mode ----
-    LOG_PATH="/workspace/llamacpp.log"
+    LOG_PATH="/app/llamacpp.log"
     # Extract the last offloaded layers line
     OFFLOADED_LINE=$(grep -E "load_tensors: offloaded [0-9]+/[0-9]+ layers to GPU" "$LOG_PATH" | tail -n 1)
 
